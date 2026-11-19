@@ -34,7 +34,11 @@ def bulk_discount_amount(items, products):
 
 
 def loyalty_discount_amount(customer, subtotal_after_coupon):
-    return subtotal_after_coupon * LOYALTY_RATE
+    if customer["loyalty"] == True:
+        return subtotal_after_coupon * LOYALTY_RATE
+    else:
+        return 0
+    
 
 
 def apply_discounts(order, customer, products, subtotal):
