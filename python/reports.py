@@ -1,4 +1,5 @@
 def find_product_by_name(products, name):
+    name = name.strip().lower()
     for product in products:
         if product["name"].lower().strip() == name.lower().strip():
             return product
