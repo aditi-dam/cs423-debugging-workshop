@@ -1,7 +1,6 @@
 def is_non_empty_string(value):
     return isinstance(value, str) and len(value) > 0
 
-# trim this
 def find_product_by_id(products, product_id):
     for product in products:
         if product["id"] == product_id:
@@ -45,6 +44,8 @@ def validate_order(order, products, customers):
         #an error should also be produced if the quantity is equal to 0
         elif quantity <= 0:
             errors.append(f"Quantity must be positive for {product['name']}")
+        elif quantity % 1 != 0:
+            errors.append(f"Quantity must be an whole number for {product['name']}")
 
         if quantity and product["stock"] < 1:
             errors.append(f"Not enough inventory for {product['name']}")
