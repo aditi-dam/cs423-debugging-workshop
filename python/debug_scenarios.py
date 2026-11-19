@@ -24,6 +24,22 @@ def main():
     check(summary["Electronics"]["product_count"] == 2, "Electronics should have 2 products")
     check(summary["Electronics"]["total_stock"] == 16, "Electronics should have 16 total stock")
 
+    # Edge case 1: Empty product list
+    empty_summary = category_summary([])
+    check(empty_summary == {}, "Empty product list should return an empty summary")
+
+    # Edge case 2: Category containing a zero-stock product
+    zero_stock_products = [
+        {"id": "P999", "name": "Test Product", "category": "Test", "price": 10.00, "stock": 0}
+    ]
+
+    zero_summary = category_summary(zero_stock_products)
+
+    check(zero_summary["Test"]["product_count"] == 1,
+        "Zero-stock product should still count as a product")
+    check(zero_summary["Test"]["total_stock"] == 0,
+        "Zero-stock product should contribute zero to total stock")
+
     subtotal = calculate_subtotal(orders[0], products)
     check(abs(subtotal - 119.97) < 0.001, "Order 1001 subtotal should be 119.97")
 
